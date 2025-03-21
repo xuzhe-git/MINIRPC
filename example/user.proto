@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package fixbug;
+
+
+option cc_generic_services = true;
+
+message ResultCode{
+    int32 errcode = 1; // 错误码 Error code
+    bytes errmsg = 2;
+}
+
+// 定义登录请求消息类型
+// Define login request message type
+message LoginRequest
+{
+    bytes name = 1;
+    bytes pwd = 2;
+}
+
+// 定义登录响应消息类型
+// Define login response message type
+message LoginResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+
+
+// 在protobuf中定义rpc方法
+// Define RPC method in protobuf
+service UserServiceRpc{
+    rpc Login(LoginRequest) returns(LoginResponse);
+}
